@@ -1,7 +1,7 @@
 import { Schema } from 'mongoose';
-import { IUser } from '../models/User';
+import { IReader } from '../models/Reader';
 
-class User implements IUser {
+class User implements IReader {
   name: string;
   email:string;
   password:string;

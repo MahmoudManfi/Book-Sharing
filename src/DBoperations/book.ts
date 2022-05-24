@@ -26,7 +26,7 @@ export function booksCount () {
   return Book.countDocuments();
 }
 
-export function findOneUser (filter: FilterQuery<bookDocument>): Promise<bookDocument> {
+export function findOneBook (filter: FilterQuery<bookDocument>): Promise<bookDocument> {
   return Book.findOne(filter)
     .then((book: bookDocument|null) => {
       if (!book) throw Error('user not found');

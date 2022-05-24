@@ -1,24 +1,21 @@
 import mongoose, { Schema } from 'mongoose';
-const passportLocalMongoose = require('passport-local-mongoose');
 
 export const options = {
-  timestamps: true,
-  discriminatorKey: 'kind'
+  timestamps: true
 };
 
-export interface IUser {
+export interface IReader {
   name: string;
   password: string;
   email: string;
   phoneNumber: string;
   address: string;
-  kind?: string;
   bookIds?: Schema.Types.ObjectId[];
 }
 
-export type userDocument = mongoose.Document & IUser;
+export type readerDocument = mongoose.Document & IReader;
 
-const UserSchema = new Schema<userDocument>({
+const readerSchema = new Schema<readerDocument>({
   name: {
     type: String,
     required: true
@@ -46,5 +43,4 @@ const UserSchema = new Schema<userDocument>({
   }]
 }, options);
 
-UserSchema.plugin(passportLocalMongoose);
-export const User = mongoose.model('User', UserSchema);
+export const Reader = mongoose.model('Reader', readerSchema);

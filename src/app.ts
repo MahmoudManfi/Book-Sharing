@@ -8,17 +8,17 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 // const loginRoute = require('./routes/user.js');
 
-// PASSPORT CONFIGURATION
-app.use(require('express-session')({
-  secret: 'dflgjdjggmxewrkewreoipogifdbvbretretrgfvbvbcv;;ldfs;lfs,dfk',
-  resave: false,
-  saveUninitialized: false
-}));
-app.use(passport.initialize());
-app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+// // PASSPORT CONFIGURATION
+// app.use(require('express-session')({
+//   secret: 'dflgjdjggmxewrkewreoipogifdbvbretretrgfvbvbcv;;ldfs;lfs,dfk',
+//   resave: false,
+//   saveUninitialized: false
+// }));
+// app.use(passport.initialize());
+// app.use(passport.session());
+// passport.use(new LocalStrategy(User.authenticate()));
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());
 
 mongoose.connect(MONGODB_URI)
   .then(() => {
@@ -28,7 +28,6 @@ mongoose.connect(MONGODB_URI)
 
 app.use('/', (req, res) => {
   res.sendFile('/home/ahmedadel/Downloads/Book-Sharing/src/index.html');
-
 });
 
 export default app;
