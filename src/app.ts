@@ -1,15 +1,16 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import { MONGODB_URI } from './config/database';
-const path = require('path')
+// const path = require('path');
 const app = express();
 const User = require('./models/User');
 const passport = require('passport');
-const LocalStrategy = require("passport-local");
-const loginRoute = require('./routes/user.js')
+const LocalStrategy = require('passport-local');
+// const loginRoute = require('./routes/user.js');
+
 // PASSPORT CONFIGURATION
-app.use(require("express-session")({
-  secret: "dflgjdjggmxewrkewreoipogifdbvbretretrgfvbvbcv;;ldfs;lfs,dfk",
+app.use(require('express-session')({
+  secret: 'dflgjdjggmxewrkewreoipogifdbvbretretrgfvbvbcv;;ldfs;lfs,dfk',
   resave: false,
   saveUninitialized: false
 }));
@@ -25,8 +26,8 @@ mongoose.connect(MONGODB_URI)
   })
   .catch(err => console.error('MongoDB connection error', err.message));
 
-app.use('/',(req,res) =>{
-   res.sendFile('/home/ahmedadel/Downloads/Book-Sharing/src/index.html');
-})  
+app.use('/', (req, res) => {
+  res.sendFile('/home/ahmedadel/Downloads/Book-Sharing/src/index.html');
+});
 
 export default app;

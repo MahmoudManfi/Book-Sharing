@@ -1,28 +1,28 @@
-class User{
-   name:string;
-   email:string;
-   password:string;
-   phoneNumber:string;
-   address:string;
-   booksIds:[];
+import { Schema } from 'mongoose';
+import { IUser } from '../models/User';
 
-   constructor(name:string,email:string,password:string,phoneNumber:string,address:string,booksIds:[]){
-      this.name = name;
-      this.email = email;
-      this.password = password;
-      this.phoneNumber = phoneNumber;
-      this.address = address;
-      this.booksIds = booksIds;
-   }
+class User implements IUser {
+  name: string;
+  email:string;
+  password:string;
+  phoneNumber:string;
+  address:string;
+  bookIds: Schema.Types.ObjectId[];
 
-   login(user:string,password:string) {
-      
-   }
+  constructor (name:string, email:string, password:string, phoneNumber:string, address:string, bookIds: Schema.Types.ObjectId[]) {
+    this.name = name;
+    this.email = email;
+    this.password = password;
+    this.phoneNumber = phoneNumber;
+    this.address = address;
+    this.bookIds = bookIds;
+  }
 
-   logout(){
+  login (user:string, password:string) {
+  }
 
-   }
-
+  logout () {
+  }
 }
 
 module.exports = User;
