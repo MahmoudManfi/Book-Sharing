@@ -19,20 +19,37 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Book = exports.options = void 0;
+exports.Reader = exports.options = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
 exports.options = {
     timestamps: true
 };
-const BookSchema = new mongoose_1.Schema({
-    title: {
+const readerSchema = new mongoose_1.Schema({
+    name: {
         type: String,
         required: true
     },
-    userIds: [{
+    password: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    phoneNumber: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    address: {
+        type: String
+    },
+    bookIds: [{
             type: mongoose_1.Schema.Types.ObjectId,
-            ref: 'User'
+            ref: 'Book'
         }]
 }, exports.options);
-exports.Book = mongoose_1.default.model('Book', BookSchema);
-//# sourceMappingURL=Book.js.map
+exports.Reader = mongoose_1.default.model('Reader', readerSchema);
+//# sourceMappingURL=Reader.js.map

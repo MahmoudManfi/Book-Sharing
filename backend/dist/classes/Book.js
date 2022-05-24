@@ -1,7 +1,7 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 class Book {
-    constructor(id, title) {
-        this.id = id;
+    constructor(title) {
         this.title = title;
     }
 }
