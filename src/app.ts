@@ -1,13 +1,10 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import { MONGODB_URI } from './config/database';
 
 const app = express();
 
-console.log(process.env.MONGO_URI);
-
-
-
-mongoose.connect('mongodb+srv://Manfy:Manfy1234444@cluster0.le5p5.mongodb.net/Book-Share?retryWrites=true&w=majority')
+mongoose.connect(MONGODB_URI)
   .then(() => {
     console.log('Database is connected');
   })
