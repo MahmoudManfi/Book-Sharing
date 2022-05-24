@@ -4,7 +4,7 @@
   "description": "Software Engineer Project",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MahmoudManfi/YFitnessBackend"
+    "url": "https://github.com/MahmoudManfi/Book-Sharing.git"
   },
   "main": "src/app.ts",
   "scripts": {
