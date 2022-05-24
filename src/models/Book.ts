@@ -6,8 +6,7 @@ export const options = {
 
 export interface IBook {
   title: string;
-  userIds: string[];
-  ISBN?: string;
+  userIds?: Schema.Types.ObjectId[];
 }
 
 export type bookDocument = mongoose.Document & IBook;
@@ -17,10 +16,6 @@ const BookSchema = new Schema<bookDocument>({
     type: String,
     required: true
   },
-  ISBN: {
-    type: String,
-    unique: true
-  },
   userIds: [{
     type: Schema.Types.ObjectId,
     ref: 'User'
@@ -28,4 +23,4 @@ const BookSchema = new Schema<bookDocument>({
 
 }, options);
 
-export const Book = mongoose.model<bookDocument>('Book', BookSchema);
+export const Book = mongoose.model('Book', BookSchema);

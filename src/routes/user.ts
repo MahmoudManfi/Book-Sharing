@@ -4,7 +4,7 @@ const passport = require('passport');
 const UserSchema = require("../models/User");
 const User = require('../classes/User');
 
-Router.get('/login',(req:any,res:any)=>{
+Router.get('/login', (req:any, res:any)=>{
        
 });
 

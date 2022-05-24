@@ -13,7 +13,7 @@ export interface IUser {
   phoneNumber: string;
   address: string;
   kind?: string;
-  bookIds: string[];
+  bookIds?: Schema.Types.ObjectId[];
 }
 
 export type userDocument = mongoose.Document & IUser;
@@ -47,4 +47,4 @@ const UserSchema = new Schema<userDocument>({
 }, options);
 
 UserSchema.plugin(passportLocalMongoose);
-export const User = mongoose.model<userDocument>('User', UserSchema);
+export const User = mongoose.model('User', UserSchema);
