@@ -1,8 +1,6 @@
 const express = require('express');
 const Router = express.Router();
 const passport = require('passport');
-const UserSchema = require("../models/User");
-const User = require('../classes/User');
 
 Router.get('/login',(req:any,res:any)=>{
        
