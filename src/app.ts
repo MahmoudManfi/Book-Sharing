@@ -6,6 +6,9 @@ import book from './routes/book';
 
 const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 app.use('/reader', reader);
 app.use('/book', book);
 
