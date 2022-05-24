@@ -3,7 +3,7 @@ import fs from 'fs';
 
 if (fs.existsSync('.env')) {
   console.log('Using .env file to supply config environment variables');
-  dotenv.config({ path: '.env' });
+  dotenv.config({path: '.env'});
 } else {
   console.error('.env file doesn\'t exist');
   process.exit(1);
