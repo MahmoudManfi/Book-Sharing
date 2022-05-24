@@ -1,8 +1,26 @@
-var BookSchema = new mongoose.Schema({
-    id: String,
-    title: String,  
-}); 
+import mongoose, { Schema } from 'mongoose';
 
+export const options = {
+  timestamps: true
+};
 
+export interface IBook {
+  title: string;
+  userIds?: Schema.Types.ObjectId[];
+}
 
-module.exports = mongoose.model("Book", BookSchema);
+export type bookDocument = mongoose.Document & IBook;
+
+const BookSchema = new Schema<bookDocument>({
+  title: {
+    type: String,
+    required: true
+  },
+  userIds: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }]
+
+}, options);
+
+export const Book = mongoose.model('Book', BookSchema);

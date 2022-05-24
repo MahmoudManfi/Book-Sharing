@@ -1,14 +1,10 @@
-class Book{
-   
-    id:string;
-    title:string;
-    
- 
-    constructor(id:string, title:string){
-       this.id = id;
-       this.title = title;
-    }
+import { IBook } from '../models/Book';
+
+class Book implements IBook {
+  title: string;
+  constructor (title: string) {
+    this.title = title;
+  }
 }
 
 module.exports = Book;
- 
