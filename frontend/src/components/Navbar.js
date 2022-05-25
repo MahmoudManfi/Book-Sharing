@@ -8,21 +8,31 @@ const NavBar = ({showSearchBar}) => {
         <Navbar.Brand href="/">ZBOOK</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
-        <div class="position-absolute end-0">
-            {showSearchBar?(
-                <Form className="d-flex">
-                <FormControl
-                type="search"
-                placeholder="Search"
-                className="me-2"
-                aria-label="Search"
-                />
-                <Button variant="outline-success">Search</Button>
-            </Form>
+        <>
+        {showSearchBar?(
+            <>
+                <div className="position-absolute end-50">
+                    <Button href='/book/addBook' variant="outline-success">Add Book</Button>
+                </div>
+                <div className="position-relative start-50">
+                    <Form className="d-flex">
+                    <FormControl
+                    type="search"
+                    placeholder="Search"
+                    className="me-2"
+                    aria-label="Search"
+                    />
+                    <Button variant="outline-success">Search</Button>
+                    </Form>
+                </div>
+                <div className="position-absolute end-0">
+                    
+                    <Button variant="outline-success">Logout</Button>
+                </div>
+            </>
         ):<span></span>}
-        </div>
-{/*         <div class="position-absolute end-0"><Button href='/login' variant="outline-success">Login</Button></div>
- */}        </Navbar.Collapse>
+        </>
+        </Navbar.Collapse>
     </Container>
     </Navbar>    
     )

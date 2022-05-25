@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import cover from '../welcome.jpg'
 import { run as runHolder } from 'holderjs/holder';
 
-const BookCard = () =>{
+const BookCard = ({book}) =>{
     return (
         <div className='container'>
             <Row xs={1} md={2} className="g-4">
@@ -12,7 +12,7 @@ const BookCard = () =>{
                 <Card>
                     <Card.Img variant="top" src={cover} />
                     <Card.Body>
-                    <Card.Title>Card title</Card.Title>
+                    <Card.Title>book.title</Card.Title>
                     <Card.Text>
                         This is a longer card with supporting text below as a natural
                         lead-in to additional content. This content is a little bit longer.

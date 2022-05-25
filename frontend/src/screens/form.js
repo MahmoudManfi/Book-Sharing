@@ -1,16 +1,16 @@
 import LoginForm from '../components/loginForm'
 import NavBar from '../components/Navbar'
-import { Link } from 'react-router-dom'
+import AddBook from '../components/AddBookForm'
 
-const LoginScreen = () =>{
+const FormScreen = ({isLoginForm}) =>{
     return (
         <>
             <NavBar showSearchBar={false}/>
             <div className='container'>
-                <LoginForm />
+                {isLoginForm?(<LoginForm />):(<AddBook/>)}
             </div>
         </>
     )
 }
-export default LoginScreen
+export default FormScreen
 
