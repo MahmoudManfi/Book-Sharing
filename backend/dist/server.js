@@ -7,6 +7,7 @@ require("module-alias/register");
 const app_1 = __importDefault(require("./app"));
 const http_status_codes_1 = require("http-status-codes");
 app_1.default.use((req, res) => {
+    console.log(req);
     const meg = 'Not found page';
     console.error(meg);
     res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({ error: meg });

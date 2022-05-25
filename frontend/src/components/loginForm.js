@@ -7,28 +7,37 @@ const LoginForm = ({login}) =>{
     const [password, setPassword] = useState('')
 
     const onSubmit = (e) => {
-      e.preventDefault()
-    
-      setEmail(e.target.email)
-      setPassword(e.target.password)
-      login({ email, password })
+        e.preventDefault()
+        console.log(email)
+        console.log(password)
+
+        if (!email) {
+        alert('Please enter your email')
+        return
+        }
+        if (!password) {
+        alert('Please enter your password')
+        return
+        }
+        
+        login({ email, password })
   
-      setEmail('')
-      setPassword('')
+        setEmail('')
+        setPassword('')
     }
       return (
         <Form onSubmit={onSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
-            <Form.Text className="text-muted">
+            <Form.Control placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+            <Form.Text className="text-muted" >
             We'll never share your email with anyone else.
             </Form.Text>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password"/>
+            <Form.Control type ='password' placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
         </Form.Group>
 {/*         <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Check me out" />

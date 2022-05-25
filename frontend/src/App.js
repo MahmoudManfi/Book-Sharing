@@ -6,23 +6,25 @@ import HomeScreen from './screens/home'
 import WelcomeScreen from './screens/welcome'
 
 const App = () => {
-  const [books, setBooks] = useState([])
   const [userId, setUserId] = useState('')
+  const [books, setBooks] = useState([])
 
-  useEffect(() => {
+/*   useEffect(() => {
     const getBooks = async () => {
       const booksFromServer = await fetchBooks()
+      console.log('booksFromServer')
+      console.log(booksFromServer)
       setBooks(booksFromServer)
+      console.log('books')
+      console.log(books)
     }
-
+    
     getBooks()
   }, [])
-
-  // Fetch Books
+ */  // Fetch Books
   const fetchBooks = async () => {
-    const res = await fetch('http://localhost:5000/book')
+    const res = await fetch('http://localhost:5000/book/allBooks')
     const data = await res.json()
-
     return data
   }
 
@@ -36,7 +38,7 @@ const App = () => {
 
   // Add Book
   const addBook = async (bookTitle, userId) => {
-    const res = await fetch('http://localhost:5000/book', {
+    const res = await fetch('http://localhost:5000/book/addBook', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -45,13 +47,21 @@ const App = () => {
     })
 
     const data = await res.json()
-
-    setBooks([...books, data])
+    if(data.status === 200)
+      setBooks(fetchBooks())
+/*     const navigate = useNavigate();
+ */    data.status === 200
+      ?(
+        <Navigate to="/book/allBooks"/>
+      )
+      : alert(data.error);
+    //setBooks([...books, data])
 
     // const id = Math.floor(Math.random() * 10000) + 1
     // const newBook = { id, ...Book }
     // setBooks([...books, newBook])
   }
+
 
   // Delete Book
   const deleteBook = async (id) => {
@@ -78,7 +88,7 @@ const App = () => {
 /*     const navigate = useNavigate();
  */    data.status === 200
       ?(
-        <Navigate to="http://localhost:5000/book/allBooks"/>
+        <Navigate to="/book/allBooks"/>
       )
       : alert(data.error);
 
@@ -89,10 +99,10 @@ const App = () => {
     <Router>
         <Routes>
           <Route path='/' element={<WelcomeScreen/>}/>
-          <Route path='/reader/login' element={<FormScreen isLoginForm={true}/>
+          <Route path='/reader/login' element={<FormScreen isLoginForm={true} onAdd= {addBook} login={addUser} userId={userId} />
           }/>
-          <Route path='/book/allBooks' element={<HomeScreen books={[books]}/>}/>
-          <Route path='/book/addBook' element={<FormScreen isLoginForm={false} onAdd= {AddBook} login={addUser} userId={userId}/>}/>
+          <Route path='/book/addBook' element={<FormScreen isLoginForm={false} onAdd= {addBook} login={addUser} userId={userId} />}/>
+          <Route path='/book/allBooks' element={<HomeScreen fetchBooks={fetchBooks}/>}/>
         </Routes>
     </Router>
   )

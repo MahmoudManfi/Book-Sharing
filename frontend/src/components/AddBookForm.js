@@ -6,12 +6,11 @@ const AddBook = ({ onAdd, userId }) => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-
     if (!title) {
-      alert('Please add the book title')
+      alert('Please add a title')
       return
     }
-    setTitle(e.target.text);
+    console.log(title)
     onAdd({ title, userId })
 
     setTitle('')
@@ -26,7 +25,7 @@ const AddBook = ({ onAdd, userId }) => {
         <Form onSubmit={onSubmit}>
             <Form.Group className="mb-3">
                 <Form.Label>Book Title</Form.Label>
-                <Form.Control type='text' placeholder="Enter Book Title"  />
+                <Form.Control type='text' placeholder="Enter Book Title"  value={title} onChange={(e) => setTitle(e.target.value)}/>
             </Form.Group>
             <Button variant="outline-success" type="submit" onSubmit={onSubmit}> Add Book </Button>
         </Form>
