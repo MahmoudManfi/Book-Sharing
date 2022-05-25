@@ -3,12 +3,12 @@ import mongoose from 'mongoose';
 import { MONGODB_URI } from './config/database';
 import reader from './routes/reader';
 import book from './routes/book';
+const cors = require('cors');
 
 const app = express();
-
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
 app.use('/reader', reader);
 app.use('/book', book);
 

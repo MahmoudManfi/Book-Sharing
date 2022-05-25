@@ -5,6 +5,7 @@ import login from './login';
 const router = express.Router();
 
 router.post('/login', (req, res) => {
+  console.log(req.body)
   login(req.body)
     .then(token => {
       res.status(StatusCodes.OK).json(token);

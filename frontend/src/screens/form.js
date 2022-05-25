@@ -7,7 +7,7 @@ const FormScreen = ({isLoginForm, onAdd, login, userId}) =>{
         <>
             <NavBar showSearchBar={false}/>
             <div className='container'>
-                {isLoginForm?(<LoginForm login={login}/>):(<AddBook onSubmit={onAdd} userId={userId}/>)}
+                {isLoginForm?(<LoginForm login={login}/>):(<AddBook onAdd={onAdd} userId={userId}/>)}
             </div>
         </>
     )
