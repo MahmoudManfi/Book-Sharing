@@ -37,3 +37,7 @@ export function findOneBook (filter: FilterQuery<bookDocument>): Promise<bookDoc
 export function getAllBooks (filter: FilterQuery<bookDocument>) {
   return Book.find(filter);
 }
+
+export function deleteAllBooks (filter: FilterQuery<bookDocument>) {
+  return Book.deleteMany(filter);
+}

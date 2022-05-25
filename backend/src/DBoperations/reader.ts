@@ -37,3 +37,7 @@ export function findOneReader (filter: FilterQuery<readerDocument>): Promise<rea
 export function getAllReaders (filter: FilterQuery<readerDocument>) {
   return Reader.find(filter);
 }
+
+export function deleteAllReaders (filter: FilterQuery<readerDocument>) {
+  return Reader.deleteMany(filter);
+}
