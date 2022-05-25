@@ -18,8 +18,8 @@ export function findById (_id: string): Promise<bookDocument> {
     });
 }
 
-export function addUserId (_id: string, userId: string) {
-  return Book.findByIdAndUpdate(_id, { $push: { userIds: userId } }, { returnNewDocument: true });
+export function addReaderId (_id: string, readerId: string) {
+  return Book.findByIdAndUpdate(_id, { $push: { userIds: readerId } }, { returnNewDocument: true });
 }
 
 export function booksCount () {

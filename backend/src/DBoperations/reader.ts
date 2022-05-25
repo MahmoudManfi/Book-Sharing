@@ -18,7 +18,7 @@ export function findById (_id: string): Promise<readerDocument> {
     });
 }
 
-export function addReaderId (_id: string, bookId: string) {
+export function addBookId (_id: string, bookId: string) {
   return Reader.findByIdAndUpdate(_id, { $push: { bookIds: bookId } }, { returnNewDocument: true });
 }
 

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import { addBook, findOneBook, addUserId,booksCount } from '../../src/DBoperations/book';
-import { addReader, addReaderId, findOneReader, readersCount } from '../../src/DBoperations/reader';
+import { addBook, findOneBook, addReaderId, booksCount } from '../../src/DBoperations/book';
+import { addReader, addBookId, findOneReader, readersCount } from '../../src/DBoperations/reader';
 import { bookDocument } from '../../src/models/Book';
 import { IReader, readerDocument } from '../../src/models/Reader';
 import { MONGODB_URI } from '../../src/config/database';
@@ -136,8 +136,8 @@ test('Check that all books exist ', () => {
 // Connect User1 with book1
 test('Add book1 to User1', async () =>{
    
-  let value_book = await addUserId(book1._id, user1._id);
-  let value_user = await addReaderId(user1._id, book1._id);
+  let value_book = await addReaderId(book1._id, user1._id);
+  let value_user = await addBookId(user1._id, book1._id);
 
   expect(value_book).not.toBe(null);
   expect(value_user).not.toBe(null);
@@ -152,8 +152,8 @@ test('Add book1 to User1', async () =>{
 
 // Connect User1 with book2
 test('Add book2 to User1', async () =>{   
-  let value_book = await addUserId(book2._id, user1._id);
-  let value_user = await addReaderId(user1._id, book2._id);
+  let value_book = await addReaderId(book2._id, user1._id);
+  let value_user = await addBookId(user1._id, book2._id);
 
   expect(value_book).not.toBe(null);
   expect(value_user).not.toBe(null);
@@ -181,8 +181,8 @@ test('Get all books that user 1 owns ', () => {
 
 test('Add book1 to User2', async () =>{
    
-  let value_book = await addUserId(book1._id, user2._id);
-  let value_user = await addReaderId(user2._id, book1._id);
+  let value_book = await addReaderId(book1._id, user2._id);
+  let value_user = await addBookId(user2._id, book1._id);
 
   expect(value_book).not.toBe(null);
   expect(value_user).not.toBe(null);
@@ -200,8 +200,8 @@ test('Add book1 to User2', async () =>{
 
 test('Add book1 to User3', async () =>{
    
-  let value_book = await addUserId(book1._id, user3._id);
-  let value_user = await addReaderId(user3._id, book1._id);
+  let value_book = await addReaderId(book1._id, user3._id);
+  let value_user = await addBookId(user3._id, book1._id);
 
   expect(value_book).not.toBe(null);
   expect(value_user).not.toBe(null);
