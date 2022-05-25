@@ -8,7 +8,7 @@ const WelcomeScreen = () =>{
             <div className='container'>
                 <WelcomeCarousel/>
                 <div className="d-grid gap-2">
-                    <Button className='mt-5' variant="outline-success" size='lg' href='/login'>Login</Button>
+                    <Button className='mt-5' variant="outline-success" size='lg' href='/reader/login'>Login</Button>
                 </div>                
             </div>
         </>

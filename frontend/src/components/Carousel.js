@@ -1,7 +1,6 @@
 
 import {Carousel, Image} from 'react-bootstrap'
 import { run as runHolder } from 'holderjs/holder';
-import img from '../img.jpeg'
 
 /* import firstSlide from 'holder.js/800x400?text=First slide&bg=373940'
 import secondSlide from 'holder.js/800x400?text=First slide&bg=373940'
@@ -14,7 +13,6 @@ import thirdSlide from 'holder.js/800x400?text=First slide&bg=373940'
             className="d-block w-100"
             src="holder.js/800x400?text=ZBOOk&bg=373940"
             alt="First slide"
-            background={img}
             />
             <Carousel.Caption>
             <h3>Reading Is Much Easier Now</h3>

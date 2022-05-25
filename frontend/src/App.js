@@ -1,136 +1,87 @@
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Header from './components/Header'
-import Footer from './components/Footer'
-import Tasks from './components/Tasks'
-import AddTask from './components/AddTask'
-import About from './components/About'
-import NavBar from './components/Navbar'
-import BookCard from './components/Card'
-import LoginScreen from './screens/login'
+import FormScreen from './screens/form'
 import HomeScreen from './screens/home'
 import WelcomeScreen from './screens/welcome'
+
 const App = () => {
-  /* const [showAddTask, setShowAddTask] = useState(false)
-  const [tasks, setTasks] = useState([])
+  const [books, setBooks] = useState([])
+  const [user, setUser] = useState()
 
   useEffect(() => {
-    const getTasks = async () => {
-      const tasksFromServer = await fetchTasks()
-      setTasks(tasksFromServer)
+    const getBooks = async () => {
+      const booksFromServer = await fetchBooks()
+      setBooks(booksFromServer)
     }
 
-    getTasks()
+    getBooks()
   }, [])
 
-  // Fetch Tasks
-  const fetchTasks = async () => {
-    const res = await fetch('http://localhost:5000/tasks')
+  // Fetch Books
+  const fetchBooks = async () => {
+    const res = await fetch('http://localhost:5000/book')
     const data = await res.json()
 
     return data
   }
 
-  // Fetch Task
-  const fetchTask = async (id) => {
-    const res = await fetch(`http://localhost:5000/tasks/${id}`)
+  // Fetch Book
+  const fetchBook = async (id) => {
+    const res = await fetch(`http://localhost:5000/book/${id}`)
     const data = await res.json()
 
     return data
   }
 
-  // Add Task
-  const addTask = async (task) => {
-    const res = await fetch('http://localhost:5000/tasks', {
+  // Add Book
+  const addBook = async (book) => {
+    const res = await fetch('http://localhost:5000/book', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
       },
-      body: JSON.stringify(task),
+      body: JSON.stringify(book),
     })
 
     const data = await res.json()
 
-    setTasks([...tasks, data])
+    setBooks([...books, data])
 
     // const id = Math.floor(Math.random() * 10000) + 1
-    // const newTask = { id, ...task }
-    // setTasks([...tasks, newTask])
+    // const newBook = { id, ...Book }
+    // setBooks([...books, newBook])
   }
 
-  // Delete Task
-  const deleteTask = async (id) => {
-    const res = await fetch(`http://localhost:5000/tasks/${id}`, {
+  // Delete Book
+  const deleteBook = async (id) => {
+    const res = await fetch(`http://localhost:5000/book/${id}`, {
       method: 'DELETE',
     })
     //We should control the response status to decide if we will change the state or not.
     res.status === 200
-      ? setTasks(tasks.filter((task) => task.id !== id))
-      : alert('Error Deleting This Task')
+      ? setBooks(books.filter((book) => book.id !== id))
+      : alert('Error Deleting This Book')
   }
 
-  // Toggle Reminder
-  const toggleReminder = async (id) => {
-    const taskToToggle = await fetchTask(id)
-    const updTask = { ...taskToToggle, reminder: !taskToToggle.reminder }
-
-    const res = await fetch(`http://localhost:5000/tasks/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify(updTask),
-    })
-
+  // Fetch User= Reader
+  const fetchUser = async (id) => {
+    const res = await fetch(`http://localhost:5000/reader/${id}`)
     const data = await res.json()
 
-    setTasks(
-      tasks.map((task) =>
-        task.id === id ? { ...task, reminder: data.reminder } : task
-      )
-    )
-  } */
+    return data
+  }
 
   return (
     <Router>
         <Routes>
           <Route path='/' element={<WelcomeScreen/>}/>
-          <Route path='/login' element={<LoginScreen/>
+          <Route path='/reader/login' element={<FormScreen isLoginForm={true}/>
           }/>
-          <Route path='/home' element={<HomeScreen/>}/>
+          <Route path='/book/allBooks' element={<HomeScreen books={[books]}/>}/>
+          <Route path='/book/addBook' element={<FormScreen isLoginForm={false}/>}/>
         </Routes>
-          <Footer />
     </Router>
-/*     <Router>
-      <div className='container'>
-        <Header
-          onAdd={() => setShowAddTask(!showAddTask)}
-          showAdd={showAddTask}
-        />
-        <Routes>
-          <Route
-            path='/'
-            element={
-              <>
-                {showAddTask && <AddTask onAdd={addTask} />}
-                {tasks.length > 0 ? (
-                  <Tasks
-                    tasks={tasks}
-                    onDelete={deleteTask}
-                    onToggle={toggleReminder}
-                  />
-                ) : (
-                  'No Tasks To Show'
-                )}
-              </>
-            }
-          />
-          <Route path='/about' element={<About />} />
-        </Routes>
-        <Footer />
-      </div>
-    </Router>
- */  )
+  )
 }
 
 export default App
