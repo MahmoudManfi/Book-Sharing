@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import { addBook, findOneBook, addReaderId, booksCount } from '../../src/DBoperations/book';
-import { addReader, addBookId, findOneReader, readersCount } from '../../src/DBoperations/reader';
+import { addBook, findOneBook, addReaderId, booksCount,deleteAllBooks } from '../../src/DBoperations/book';
+import { addReader, addBookId, findOneReader, readersCount,deleteAllReaders } from '../../src/DBoperations/reader';
 import { bookDocument } from '../../src/models/Book';
 import { IReader, readerDocument } from '../../src/models/Reader';
 import { MONGODB_URI } from '../../src/config/database';
@@ -11,26 +11,60 @@ require('dotenv').config();
 /* global test expect */
 
 
-
-
-/* **************IMPORTANT********************
-For those test to pass, make sure that the following conditions are satisfied
-  1- The book relation(table) is empty
-  2- The user relation doesn't contains users with the following e-mails:
-       User1@gmail.com,User2@gmail.com,User3@gmail.com
-*/
-
-
-
-
 test('connectDatabase', () => {
   return mongoose.connect(MONGODB_URI);
 }, 10000);
 
 
 
+/* 
+  This test make some dummy entries in the database. So first, we have to make sure that those dummy entries 
+  don't exist. Moreover, the tests drops the 'book' table and recreate it.
+*/
+
+
+test('Drop the entries from book table' , async () =>{
+  await deleteAllBooks({});
+});
+
+test('Delete the users we are going to add don\'t exist', async ()=>{
+  await deleteAllReaders({email : "User1@gmail.com"});
+  await deleteAllReaders({email : "User2@gmail.com"});
+  await deleteAllReaders({email : "User3@gmail.com"});
+});
+
+test('Make sure that the users and books are deleted', async ()=>{
+  
+  for(let i = 1 ; i <= 3 ; i++){
+    let user_email = 'User'.concat(i.toString()).concat('@gmail.com');
+    console.log(user_email);
+    try{
+      await findOneReader({email: user_email});  
+    }catch{
+      continue;
+    }  
+    throw Error(user_email + 'is found but it should have been deleted');
+         
+  }
+  
+  for(let i = 1 ; i<=5 ;i++){
+    let book_name = 'TestDummyBook';
+    book_name = book_name.concat(i.toString());
+    try{
+      await findOneBook({ title: book_name });
+    }catch{
+      continue;
+    }
+    throw Error(book_name + 'exists but it should have been deleted');
+  }
+
+});
+
+
+
 // Adding the necessary users and books to our database 
 // First add some books to the database 
+
 
 
 
@@ -268,3 +302,9 @@ test('check that user3 owns only one book', () => {
 //   const count = await readersCount();
 //   expect(count).toBe(1);
 // });
+
+
+test('Closing the database', () => {
+  return mongoose.disconnect();
+  // return mongoose.connect(MONGODB_URI);
+}, 10000);
