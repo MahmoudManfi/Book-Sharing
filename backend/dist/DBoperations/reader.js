@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllReaders = exports.findOneReader = exports.readersCount = exports.addReaderId = exports.findById = exports.addReader = void 0;
+exports.deleteAllReaders = exports.getAllReaders = exports.findOneReader = exports.readersCount = exports.addBookId = exports.findById = exports.addReader = void 0;
 const Reader_1 = require("@src/models/Reader");
 function addReader(readerData) {
     const user = new Reader_1.Reader(Object.assign({}, readerData));
@@ -17,10 +17,10 @@ function findById(_id) {
     });
 }
 exports.findById = findById;
-function addReaderId(_id, bookId) {
+function addBookId(_id, bookId) {
     return Reader_1.Reader.findByIdAndUpdate(_id, { $push: { bookIds: bookId } }, { returnNewDocument: true });
 }
-exports.addReaderId = addReaderId;
+exports.addBookId = addBookId;
 function readersCount() {
     return Reader_1.Reader.countDocuments();
 }
@@ -38,4 +38,8 @@ function getAllReaders(filter) {
     return Reader_1.Reader.find(filter);
 }
 exports.getAllReaders = getAllReaders;
+function deleteAllReaders(filter) {
+    return Reader_1.Reader.deleteMany(filter);
+}
+exports.deleteAllReaders = deleteAllReaders;
 //# sourceMappingURL=reader.js.map

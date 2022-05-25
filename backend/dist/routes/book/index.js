@@ -24,7 +24,7 @@ router.post('/addBook', (req, res) => __awaiter(void 0, void 0, void 0, function
     let book = yield (0, book_1.addBook)(req.body.title);
     if (!book)
         throw res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({ Error: 'can\'t add new book' });
-    book = yield (0, book_1.addUserId)(book._id, req.body.userId);
+    book = yield (0, book_1.addReaderId)(book._id, req.body.userId);
     if (!book)
         throw res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({ Error: 'can\'t add user' });
     res.status(http_status_codes_1.StatusCodes.OK).json(book);

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllBooks = exports.findOneBook = exports.booksCount = exports.addUserId = exports.findById = exports.addBook = void 0;
+exports.deleteAllBooks = exports.getAllBooks = exports.findOneBook = exports.booksCount = exports.addReaderId = exports.findById = exports.addBook = void 0;
 const Book_1 = require("@src/models/Book");
 function addBook(title) {
     const book = new Book_1.Book({
@@ -19,10 +19,10 @@ function findById(_id) {
     });
 }
 exports.findById = findById;
-function addUserId(_id, userId) {
-    return Book_1.Book.findByIdAndUpdate(_id, { $push: { userIds: userId } }, { returnNewDocument: true });
+function addReaderId(_id, readerId) {
+    return Book_1.Book.findByIdAndUpdate(_id, { $push: { userIds: readerId } }, { returnNewDocument: true });
 }
-exports.addUserId = addUserId;
+exports.addReaderId = addReaderId;
 function booksCount() {
     return Book_1.Book.countDocuments();
 }
@@ -40,4 +40,8 @@ function getAllBooks(filter) {
     return Book_1.Book.find(filter);
 }
 exports.getAllBooks = getAllBooks;
+function deleteAllBooks(filter) {
+    return Book_1.Book.deleteMany(filter);
+}
+exports.deleteAllBooks = deleteAllBooks;
 //# sourceMappingURL=book.js.map

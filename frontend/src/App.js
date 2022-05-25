@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes, Navigate  } from 'react-router-dom'
+import AddBook from './components/AddBookForm'
 import FormScreen from './screens/form'
 import HomeScreen from './screens/home'
 import WelcomeScreen from './screens/welcome'
 
 const App = () => {
   const [books, setBooks] = useState([])
-  const [user, setUser] = useState()
+  const [userId, setUserId] = useState('')
 
   useEffect(() => {
     const getBooks = async () => {
@@ -34,13 +35,13 @@ const App = () => {
   }
 
   // Add Book
-  const addBook = async (book) => {
+  const addBook = async (bookTitle, userId) => {
     const res = await fetch('http://localhost:5000/book', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
       },
-      body: JSON.stringify(book),
+      body: JSON.stringify({bookTitle, userId}),
     })
 
     const data = await res.json()
@@ -63,14 +64,27 @@ const App = () => {
       : alert('Error Deleting This Book')
   }
 
-  // Fetch User= Reader
-  const fetchUser = async (id) => {
-    const res = await fetch(`http://localhost:5000/reader/${id}`)
+  // Add user
+  const addUser = async (email, password) => {
+    const res = await fetch('http://localhost:5000/reader/login', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({email, password}),
+    })
+
     const data = await res.json()
+/*     const navigate = useNavigate();
+ */    data.status === 200
+      ?(
+        <Navigate to="http://localhost:5000/book/allBooks"/>
+      )
+      : alert(data.error);
 
-    return data
+      setUserId(data._id)
+
   }
-
   return (
     <Router>
         <Routes>
@@ -78,7 +92,7 @@ const App = () => {
           <Route path='/reader/login' element={<FormScreen isLoginForm={true}/>
           }/>
           <Route path='/book/allBooks' element={<HomeScreen books={[books]}/>}/>
-          <Route path='/book/addBook' element={<FormScreen isLoginForm={false}/>}/>
+          <Route path='/book/addBook' element={<FormScreen isLoginForm={false} onAdd= {AddBook} login={addUser} userId={userId}/>}/>
         </Routes>
     </Router>
   )
