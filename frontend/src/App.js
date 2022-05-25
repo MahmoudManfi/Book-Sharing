@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Routes, Navigate  } from 'react-router-dom'
-import AddBook from './components/AddBookForm'
 import FormScreen from './screens/form'
 import HomeScreen from './screens/home'
 import WelcomeScreen from './screens/welcome'
+let globalId = ''
 
 const App = () => {
   const [userId, setUserId] = useState('')
   const [books, setBooks] = useState([])
 
-/*   useEffect(() => {
+  useEffect(() => {
     const getBooks = async () => {
       const booksFromServer = await fetchBooks()
       console.log('booksFromServer')
@@ -21,7 +21,7 @@ const App = () => {
     
     getBooks()
   }, [])
- */  // Fetch Books
+  // Fetch Books
   const fetchBooks = async () => {
     const res = await fetch('http://localhost:5000/book/allBooks')
     const data = await res.json()
@@ -37,29 +37,32 @@ const App = () => {
   }
 
   // Add Book
-  const addBook = async (bookTitle, userId) => {
+  const addBook = async (title, userId) => {
+    console.log(title)
+    console.log(userId)
     const res = await fetch('http://localhost:5000/book/addBook', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
       },
-      body: JSON.stringify({bookTitle, userId}),
+      body: JSON.stringify({title, userId}),
     })
+    console.log(res.body)
 
     const data = await res.json()
-    if(data.status === 200)
-      setBooks(fetchBooks())
+    console.log(data)
+    if(res.status === 200)
+      setBooks([...books, data])
+
 /*     const navigate = useNavigate();
- */    data.status === 200
+ */    res.status === 200
       ?(
-        <Navigate to="/book/allBooks"/>
+        <Route exact path='/'>
+          <Navigate to="/book/allBooks"/>
+        </Route>
       )
       : alert(data.error);
-    //setBooks([...books, data])
 
-    // const id = Math.floor(Math.random() * 10000) + 1
-    // const newBook = { id, ...Book }
-    // setBooks([...books, newBook])
   }
 
 
@@ -76,25 +79,29 @@ const App = () => {
 
   // Add user
   const addUser = async (email, password) => {
+    const body = {email, password}
     const res = await fetch('http://localhost:5000/reader/login', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
       },
-      body: JSON.stringify({email, password}),
+      body: JSON.stringify(email, password),
     })
 
     const data = await res.json()
 /*     const navigate = useNavigate();
- */    data.status === 200
+ */
+    if(res.status === 200){
+      setUserId(data._id)
+    }
+    res.status === 200
       ?(
         <Navigate to="/book/allBooks"/>
       )
       : alert(data.error);
-
-      setUserId(data._id)
-
-  }
+      console.log('globalId')
+      console.log(globalId)
+    }
   return (
     <Router>
         <Routes>
@@ -108,4 +115,4 @@ const App = () => {
   )
 }
 
-export default App
+export {App, globalId}

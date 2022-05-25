@@ -25,6 +25,7 @@ const LoginForm = ({login}) =>{
         setEmail('')
         setPassword('')
     }
+    
       return (
         <Form onSubmit={onSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -42,7 +43,7 @@ const LoginForm = ({login}) =>{
 {/*         <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Check me out" />
         </Form.Group>
- */}        <Button variant="outline-success" type="submit" onSubmit={onSubmit}>
+ */}        <Button variant="outline-success" type="submit" href='/book/allBooks' onSubmit={onSubmit}>
             Login
         </Button>
         </Form>

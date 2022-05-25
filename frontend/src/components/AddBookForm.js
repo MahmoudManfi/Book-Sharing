@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import {Form, Button} from 'react-bootstrap'
+import {globalId} from '../App'
 
 const AddBook = ({ onAdd, userId }) => {
   const [title, setTitle] = useState('')
@@ -11,23 +12,17 @@ const AddBook = ({ onAdd, userId }) => {
       return
     }
     console.log(title)
-    onAdd({ title, userId })
+    onAdd(title, globalId )
 
     setTitle('')
   }
-/*   const getInputValue = (event)=>{
-    const value = event.target.value;
-    console.log(value)
-  }
-  onChange={getInputValue}
- */
   return (
         <Form onSubmit={onSubmit}>
             <Form.Group className="mb-3">
                 <Form.Label>Book Title</Form.Label>
                 <Form.Control type='text' placeholder="Enter Book Title"  value={title} onChange={(e) => setTitle(e.target.value)}/>
             </Form.Group>
-            <Button variant="outline-success" type="submit" onSubmit={onSubmit}> Add Book </Button>
+            <Button variant="outline-success" type="submit" onSubmit={onSubmit}/* href="/book/allBooks" */> Add Book </Button>
         </Form>
     
   )

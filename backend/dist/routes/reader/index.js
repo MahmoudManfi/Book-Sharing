@@ -8,6 +8,7 @@ const http_status_codes_1 = require("http-status-codes");
 const login_1 = __importDefault(require("./login"));
 const router = express_1.default.Router();
 router.post('/login', (req, res) => {
+    console.log(req.body);
     (0, login_1.default)(req.body)
         .then(token => {
         res.status(http_status_codes_1.StatusCodes.OK).json(token);
