@@ -1,5 +1,5 @@
 import express from 'express';
-import { addBook, addReaderId, getAllBooks } from '@src/DBoperations/book';
+import { addBook, getAllBooks } from '@src/DBoperations/book';
 import { bookDocument, IBook } from '@src/models/Book';
 import { StatusCodes } from 'http-status-codes';
 
@@ -11,12 +11,8 @@ router.get('/allBooks', async (req, res) => {
 });
 
 router.post('/addBook', async (req, res) => {
-  let book: bookDocument | null = await addBook(req.body.title);
+  const book: bookDocument = await addBook(req.body.title);
   if (!book) throw res.status(StatusCodes.NOT_FOUND).json({ Error: 'can\'t add new book' });
-
-  book = await addReaderId(book._id, req.body.userId);
-
-  if (!book) throw res.status(StatusCodes.NOT_FOUND).json({ Error: 'can\'t add user' });
 
   res.status(StatusCodes.OK).json(book);
 });
