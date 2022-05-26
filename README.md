@@ -1,5 +1,4 @@
-# Instructins to Run the app
-
+# Book-Sharing app
 The project is done using the following stack:  
 1. Nodejs
 2. MangoDB
